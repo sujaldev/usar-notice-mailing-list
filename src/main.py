@@ -40,7 +40,7 @@ def main():
     process_registrations_and_removals()
     new_notifications, notifications = check_new_notifications()
     if new_notifications:
-        for description, url in notifications:
+        for description, url in notifications.items():
             send_notification(description, url)
 
 
