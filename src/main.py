@@ -3,7 +3,7 @@ from typing import Tuple
 
 from scraper import fetch_notifications
 from mailer import send_notification
-from signup_remove import process_registrations_and_removals
+from registrar import process_registrations_and_removals
 
 LAST_COUNT_FILE = "last_count.csv"
 
