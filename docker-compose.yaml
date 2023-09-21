@@ -1,0 +1,9 @@
+services:
+  usar-mailer:
+    build: .
+    image: sujaldev/usar-mailer:latest
+    volumes:
+      - ./data:/app/data/
+    environment:
+      - PASSWORD=${PASSWORD}
+      - INTERVAL=${INTERVAL}

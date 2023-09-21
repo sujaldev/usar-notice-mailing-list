@@ -6,7 +6,7 @@ from email.mime.text import MIMEText
 
 SENDER = "usar.unofficial@gmail.com"
 PASSWORD = os.environ.get("PASSWORD")
-with open("emails.csv") as file:
+with open("data/emails.csv") as file:
     RECIPIENTS = list(dict.fromkeys(file.read().splitlines()))
 
 

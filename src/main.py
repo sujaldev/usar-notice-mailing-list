@@ -1,11 +1,12 @@
-from os.path import isfile
+import os
+from time import sleep
 from typing import Tuple
 
-from scraper import fetch_notifications
 from mailer import send_notification
+from scraper import fetch_notifications
 from registrar import process_registrations_and_removals
 
-LAST_COUNT_FILE = "last_count.csv"
+LAST_COUNT_FILE = "data/last_count.csv"
 
 
 def check_new_notifications() -> Tuple[bool, dict[str, str]]:
@@ -17,7 +18,7 @@ def check_new_notifications() -> Tuple[bool, dict[str, str]]:
 
     # On initialization, we'll assume we've already sent out emails for all existing notifications because assuming
     # otherwise would just spam the mailing list subscribers.
-    if not isfile(LAST_COUNT_FILE):
+    if not os.path.isfile(LAST_COUNT_FILE):
         with open(LAST_COUNT_FILE, "w") as file:
             file.write(str(len(notifications)))
         return False, {}
@@ -44,4 +45,9 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    while True:
+        try:
+            main()
+            sleep(int(os.getenv("INTERVAL", 300)))
+        except Exception as e:
+            print(e)

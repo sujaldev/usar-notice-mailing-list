@@ -6,11 +6,12 @@ authentication automatically (because if someone can send out emails from your a
 """
 
 import os
-import imaplib
 import email
+import imaplib
 
 EMAIL = "usar.unofficial@gmail.com"
 PASSWORD = os.environ.get("PASSWORD")
+CSV_PATH = "data/emails.csv"
 
 
 def process_registrations_and_removals():
@@ -35,12 +36,12 @@ def process_registrations_and_removals():
             # Moving to trash instead of deleting to keep a log and recover if errors occur.
             imap.store(uid, "+X-GM-LABELS", "\\Trash")
 
-            with open("emails.csv") as file:
+            with open(CSV_PATH) as file:
                 emails = list(dict.fromkeys(file.read().splitlines()))
                 if sender not in emails and "add" in operation:
                     emails.append(sender)
                 elif sender in emails and "remove" in operation:
                     emails.remove(sender)
 
-            with open("emails.csv", "w") as file:
+            with open(CSV_PATH, "w") as file:
                 file.write("\n".join(emails) + "\n")
