@@ -6,7 +6,6 @@ many notifications it saw during the last check and compares that to the number 
 
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
 
@@ -16,9 +15,7 @@ ANCHOR_XPATH = "/html/body/table/tbody[2]/tr/td[2]/a"
 
 
 def fetch_notifications() -> dict[str, str]:
-    options = Options()
-    options.add_argument("--headless=new")
-    driver = webdriver.Chrome(options=options)
+    driver = webdriver.Remote("http://selenium:4444", options=webdriver.ChromeOptions())
     driver.get(URL)
 
     try:
@@ -34,3 +31,7 @@ def fetch_notifications() -> dict[str, str]:
         driver.quit()
 
     return notifications
+
+
+if __name__ == "__main__":
+    print(fetch_notifications())

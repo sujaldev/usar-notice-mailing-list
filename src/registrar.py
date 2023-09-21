@@ -37,7 +37,7 @@ def process_registrations_and_removals():
             imap.store(uid, "+X-GM-LABELS", "\\Trash")
 
             with open(CSV_PATH) as file:
-                emails = list(dict.fromkeys(file.read().splitlines()))
+                emails = [e for e in dict.fromkeys(file.read().strip().splitlines()) if e]
                 if sender not in emails and "add" in operation:
                     emails.append(sender)
                 elif sender in emails and "remove" in operation:
