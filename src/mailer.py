@@ -5,7 +5,7 @@ from email.mime.text import MIMEText
 SENDER = "usar.unofficial@gmail.com"
 PASSWORD = os.environ.get("PASSWORD")
 with open("emails.csv") as file:
-    RECIPIENTS = list(set(file.read().splitlines()))
+    RECIPIENTS = list(dict.fromkeys(file.read().splitlines()))
 
 
 def send_notification(description: str, url: str = None) -> None:
