@@ -1,3 +1,5 @@
+# This module deals with sending out emails to all subscribers in the mailing list.
+
 import os
 import smtplib
 from email.mime.text import MIMEText

@@ -1,3 +1,9 @@
+"""
+This module deals with scrapping the university website to check for new notifications, if there exist new ones, it
+extracts the description and the URL (can be None) for all new entries to a dict. It does so by keeping count of how
+many notifications it saw during the last check and compares that to the number of notifications currently present.
+"""
+
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
