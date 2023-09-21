@@ -6,8 +6,11 @@ from email.mime.text import MIMEText
 
 SENDER = "usar.unofficial@gmail.com"
 PASSWORD = os.environ.get("PASSWORD")
+
+if not os.path.isfile("data/emails.csv"):
+    open("data/emails.csv", "w").close()
 with open("data/emails.csv") as file:
-    RECIPIENTS = list(dict.fromkeys(file.read().splitlines()))
+    RECIPIENTS = list(dict.fromkeys(file.read().strip().splitlines()))
 
 
 def send_notification(description: str, url: str = None) -> None:
@@ -15,8 +18,8 @@ def send_notification(description: str, url: str = None) -> None:
     msg = MIMEText(f"<html><body>{body}</body></html>", "html")
     msg['Subject'] = description[:72] + ("..." if len(description) > 72 else "")
     msg['From'] = f"USAR Unofficial <{SENDER}>"
-    msg['To'] = ', '.join(RECIPIENTS)
+    msg['Bcc'] = ', '.join(RECIPIENTS)
 
     with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
         smtp.login(SENDER, PASSWORD)
-        smtp.sendmail(SENDER, RECIPIENTS, msg.as_string())
+        smtp.send_message(msg)
