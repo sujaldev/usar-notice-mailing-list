@@ -9,6 +9,8 @@ import os
 import email
 import imaplib
 
+from mailer import send_confirmation
+
 EMAIL = "usar.unofficial@gmail.com"
 PASSWORD = os.environ.get("PASSWORD")
 CSV_PATH = "data/emails.csv"
@@ -40,8 +42,10 @@ def process_registrations_and_removals():
                 emails = [e for e in dict.fromkeys(file.read().strip().splitlines()) if e]
                 if sender not in emails and "add" in operation:
                     emails.append(sender)
+                    send_confirmation(sender, addition=True)
                 elif sender in emails and "remove" in operation:
                     emails.remove(sender)
+                    send_confirmation(sender, addition=False)
 
             with open(CSV_PATH, "w") as file:
                 file.write("\n".join(emails) + "\n")
