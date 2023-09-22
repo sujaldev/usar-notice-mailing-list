@@ -1,6 +1,6 @@
 """
 This module handles all the registration/removal logic for subscribers of the mailing list. Anyone sending an email to
-the address "usar.unofficial@gmail.com" with "add" anywhere in the subject of the email (case-insensitive), will be
+the address "usar@xserv.dev" with "add" anywhere in the subject of the email (case-insensitive), will be
 added to the mailing list. For removals, the keyword is "remove". This approach is simple, convenient and deals with
 authentication automatically (because if someone can send out emails from your address, you've got bigger problems :).
 """

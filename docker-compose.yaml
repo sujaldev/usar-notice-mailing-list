@@ -13,4 +13,5 @@ services:
       - ./data:/app/data/
     environment:
       - PASSWORD=${PASSWORD}
+      - SENDGRID_KEY=${SENDGRID_KEY}
       - INTERVAL=${INTERVAL}
