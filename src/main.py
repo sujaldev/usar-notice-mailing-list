@@ -1,4 +1,5 @@
 import os
+import logging
 from time import sleep
 from typing import Tuple
 
@@ -50,4 +51,4 @@ if __name__ == "__main__":
             main()
             sleep(int(os.getenv("INTERVAL", 300)))
         except Exception as e:
-            print(e)
+            logging.error(e)
