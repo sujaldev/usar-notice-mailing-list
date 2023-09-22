@@ -35,17 +35,17 @@ def process_registrations_and_removals():
             if "<" in sender:
                 sender = sender.split("<")[1][:-1]
 
-            # Moving to trash instead of deleting to keep a log and recover if errors occur.
-            imap.store(uid, "+X-GM-LABELS", "\\Trash")
-
             with open(CSV_PATH) as file:
                 emails = [e for e in dict.fromkeys(file.read().strip().splitlines()) if e]
                 if sender not in emails and "add" in operation:
                     emails.append(sender)
                     send_confirmation(sender, addition=True)
+                    # Moving to trash instead of deleting to keep a log and recover if errors occur.
+                    imap.store(uid, "+X-GM-LABELS", "\\Trash")
                 elif sender in emails and "remove" in operation:
                     emails.remove(sender)
                     send_confirmation(sender, addition=False)
+                    imap.store(uid, "+X-GM-LABELS", "\\Trash")
 
             with open(CSV_PATH, "w") as file:
                 file.write("\n".join(emails) + "\n")
