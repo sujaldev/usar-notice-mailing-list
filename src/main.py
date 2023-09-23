@@ -5,7 +5,6 @@ from typing import Tuple
 
 from mailer import send_notification
 from scraper import fetch_notifications
-from registrar import process_registrations_and_removals
 
 LAST_COUNT_FILE = "data/last_count.csv"
 
@@ -38,7 +37,6 @@ def check_new_notifications() -> Tuple[bool, dict[str, str]]:
 
 
 def main():
-    process_registrations_and_removals()
     new_notifications, notifications = check_new_notifications()
     if new_notifications:
         for description, url in notifications.items():
