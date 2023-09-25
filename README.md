@@ -5,5 +5,8 @@ Robotics).
 
 ## Usage
 
-You can subscribe to the mailing list by sending an email that contains `add` in the subject to the email address
-[usar.unofficial@gmail.com](mailto:usar.unofficial@gmail.com). To unsubscribe, send an email with `remove` instead.
+To subscribe, join the [USAR Unofficial](https://groups.google.com/g/usar-unofficial) group on Google Groups. To
+unsubscribe, send an email to:
+[usar-unofficial+unsubscribe@googlegroups.com](mailto:usar-unofficial+unsubscribe@googlegroups.com)
+
+To know more, check [this](https://usar.sujal.dev/mailing-list) page.
