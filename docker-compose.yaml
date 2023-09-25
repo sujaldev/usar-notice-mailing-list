@@ -1,14 +1,7 @@
 services:
-  selenium:
-    image: seleniarm/standalone-chromium:latest
-    shm_size: 2gb
-    hostname: selenium
-    privileged: true
   usar-mailer:
     build: .
     image: sujaldev/usar-mailer:latest
-    depends_on:
-      - selenium
     volumes:
       - ./data:/app/data/
     environment:
